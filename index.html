@@ -3,28 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search and Display Results</title>
+    <title>Search and Display Results v0.2</title>
 </head>
 <body>
 <h1>Search and Display Results</h1>
-<label for="inputNumbers">Enter 7 numbers separated by commas:</label><br>
-<input type="text" id="inputNumbers" placeholder="e.g., 1,2,3,4,5,6,7"><br><br>
+
+<!-- 7つの数字を入力するテキストボックス -->
+<label for="num1">Number 1 (1-48):</label>
+<input type="number" id="num1" min="1" max="48" required><br><br>
+
+<label for="num2">Number 2 (1-48):</label>
+<input type="number" id="num2" min="1" max="48" required><br><br>
+
+<label for="num3">Number 3 (1-48):</label>
+<input type="number" id="num3" min="1" max="48" required><br><br>
+
+<label for="num4">Number 4 (1-48):</label>
+<input type="number" id="num4" min="1" max="48" required><br><br>
+
+<label for="num5">Number 5 (1-48):</label>
+<input type="number" id="num5" min="1" max="48" required><br><br>
+
+<label for="num6">Number 6 (1-48):</label>
+<input type="number" id="num6" min="1" max="48" required><br><br>
+
+<label for="num7">Number 7 (1-48):</label>
+<input type="number" id="num7" min="1" max="48" required><br><br>
+
+<!-- 検索ボタンと結果表示エリア -->
 <button onclick="searchData()">Search</button><br><br>
 <div id="searchResult"></div><br><br>
+
+<!-- ランダム表示ボタンと結果表示エリア -->
 <button onclick="displayRandom()">Display Random Value</button><br><br>
 <div id="randomResult"></div>
 
 <script>
     function searchData() {
-        const input = document.getElementById('inputNumbers').value;
-        const numbers = input.split(',').map(num => parseInt(num.trim()));
+        const num1 = document.getElementById('num1').value.trim();
+        const num2 = document.getElementById('num2').value.trim();
+        const num3 = document.getElementById('num3').value.trim();
+        const num4 = document.getElementById('num4').value.trim();
+        const num5 = document.getElementById('num5').value.trim();
+        const num6 = document.getElementById('num6').value.trim();
+        const num7 = document.getElementById('num7').value.trim();
 
-        if (numbers.length !== 7) {
-            alert('Please enter exactly 7 numbers separated by commas.');
+        const inputNumbers = [num1, num2, num3, num4, num5, num6, num7];
+
+        // 入力値のバリデーション: 1から48の範囲内の数字かどうかをチェック
+        if (!inputNumbers.every(num => num.match(/^\d+$/) && parseInt(num) >= 1 && parseInt(num) <= 48)) {
+            alert('Please enter exactly 7 numbers between 1 and 48.');
             return;
         }
 
-        const key = numbers.join('-');
+        const key = inputNumbers.join('-');
 
         fetch('gs-bonus.json')
             .then(response => response.json())
