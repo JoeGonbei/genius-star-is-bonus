@@ -63,9 +63,9 @@
         fetch('gs-bonus.json')
             .then(response => response.json())
             .then(data => {
-                const result = data[key];
+                const result = data.find(item => item === key);
                 if (result) {
-                    document.getElementById('searchResult').innerText = result;
+                    document.getElementById('searchResult').innerText = 'Result found';
                 } else {
                     document.getElementById('searchResult').innerText = 'No results found';
                 }
@@ -80,9 +80,8 @@
         fetch('gs-bonus.json')
             .then(response => response.json())
             .then(data => {
-                const keys = Object.keys(data);
-                const randomKey = keys[Math.floor(Math.random() * keys.length)];
-                const randomValue = data[randomKey];
+                const randomIndex = Math.floor(Math.random() * data.length);
+                const randomValue = data[randomIndex];
                 document.getElementById('randomResult').innerText = `Random Value: ${randomValue}`;
             })
             .catch(error => {
