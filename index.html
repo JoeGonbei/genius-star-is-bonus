@@ -6,7 +6,7 @@
     <title>Search and Display Results</title>
 </head>
 <body>
-<h1>Search and Display Results v0.3</h1>
+<h1>Search and Display Results v0.4</h1>
 
 <!-- 7つの数字を入力するテキストボックス -->
 <label for="num1">Number 1 (1-48):</label>
@@ -64,10 +64,12 @@
             .then(response => response.json())
             .then(data => {
                 const result = data.find(item => item === key);
+                const inputDisplay = `You entered: ${sortedNumbers.join(', ')}`;
+
                 if (result) {
-                    document.getElementById('searchResult').innerText = 'Result found';
+                    document.getElementById('searchResult').innerText = `${inputDisplay}\nResult: ${result}`;
                 } else {
-                    document.getElementById('searchResult').innerText = 'No results found';
+                    document.getElementById('searchResult').innerText = `${inputDisplay}\nNo results found`;
                 }
             })
             .catch(error => {
